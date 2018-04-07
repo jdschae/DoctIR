@@ -2,8 +2,10 @@ from bs4 import BeautifulSoup
 import time	
 import requests
 import sys
+from string import ascii_uppercase
 
 BASE = 'https://www.mayoclinic.org'
+WIKI_BASE = 'https://en.wikipedia.org/wiki/Lists_of_diseases'
 URLS = []
 SEEN = {}
 
@@ -66,5 +68,16 @@ def crawlPages(seed_url):
 		else:
 			scrapePage(current_url, t)
 
+def main():
+	QUEUE = []
+	wiki_base_urls = []
+	print(ascii_uppercase)
+	for c in ascii_uppercase:
+		QUEUE.put(WIKI_BASE + '_({})'.format(c))
+	QUEUE.put(WIKI_BASE + '_(0-9)')
+
+
+
 if __name__ == '__main__':
-	crawlPages('https://www.mayoclinic.org/diseases-conditions/index')
+	main()
+	#crawlPages('https://www.mayoclinic.org/diseases-conditions/index')

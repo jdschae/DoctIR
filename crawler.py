@@ -73,16 +73,13 @@ def crawlPages(seed_url):
 		QUEUE = QUEUE[1:]
 		# get list page
 		if 'letter' in t:
-			results = scrapeList(current_url) 
-			QUEUE += results
-			print('$$$ {} : {}'.format(current_url, results))
+			QUEUE += scrapeList(current_url) 
 		# get specific page
 		else:
 			scrapePage(current_url, t)
 
 if __name__ == '__main__':
-	# scrapePage('https://www.mayoclinic.org/diseases-conditions/baby-acne/symptoms-causes/syc-20369880', 'Baby Acne')
 	crawlPages('https://www.mayoclinic.org/diseases-conditions/index')
 	with open('mayoclinic.txt', 'w') as outfile:
 		json.dump(DB, outfile)
-	
+	 

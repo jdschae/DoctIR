@@ -52,7 +52,6 @@ def preprocess(text, ngram=1):
 	stemmed = stemWords(filtered)
 	results = []
 	for i in range(ngram, len(stemmed)):
-		print(stemmed[i - ngram: i])
 		results.append(' '.join(stemmed[i-ngram:i]))
 	return results
 

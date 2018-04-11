@@ -1,7 +1,8 @@
 from collections import Counter, defaultdict
 from math import log, sqrt
 
-
+# TODO: weight symptoms more than text
+# hyperparameters
 class VectorSpaceModel():
     '''
     Retrieves documents using a vector space model.
@@ -19,7 +20,7 @@ class VectorSpaceModel():
         self.__query_wt_scheme = query_wt_scheme
         self.__doc_weights = defaultdict(lambda: defaultdict(float))
         self.__doc_norms = defaultdict(float)
-        self.__coll_freq_comp = defaultdict(lambda: defaultdict(float))
+        self.__coll_freq_comp = defaultdict(float)
         self.docs = set()
 
     @property
@@ -83,7 +84,7 @@ class VectorSpaceModel():
 
     def __calc_doc_norms(self):
         for doc_id in self.__doc_weights:
-            self.__doc_norms = self.__norm(self.__doc_weights[doc_id].values())
+            self.__doc_norms[doc_id] = self.__norm(self.__doc_weights[doc_id].values())
 
     def __norm(self, wt_vector):
         norm = 0.
@@ -120,7 +121,7 @@ class VectorSpaceModel():
 
     def __calc_similarities(self, relevant_docs_ids, query_weights):
         similarities = defaultdict(float)
-        query_norm = self.__norm(query_weights)
+        query_norm = self.__norm(query_weights.values())
         for doc_id in relevant_docs_ids:
             inner_product = 0.
             for token, query_weight in query_weights.items():

@@ -53,7 +53,7 @@ def preprocess(text, ngram=1):
 	results = []
 	for i in range(ngram, len(stemmed)):
 		print(stemmed[i - ngram: i])
-		results.append(stemmed[i-ngram:i])
+		results.append(' '.join(stemmed[i-ngram:i]))
 	return results
 
 if __name__ == '__main__':

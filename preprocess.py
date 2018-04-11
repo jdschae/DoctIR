@@ -41,7 +41,7 @@ def stemWords(tokens):
 		result.append(inst.stem(t))
 	return result
 
-def preprocess(text):
+def preprocess(text, ngram=1):
 	loadStopwords()
 	data = text.lower().strip()
 	# tokenize
@@ -50,7 +50,11 @@ def preprocess(text):
 	filtered = removeStopwords(tokens)
 	# stem tokens
 	stemmed = stemWords(filtered)
-	return stemmed
+	results = []
+	for i in range(ngram, len(stemmed)):
+		print(stemmed[i - ngram: i])
+		results.append(stemmed[i-ngram:i])
+	return results
 
 if __name__ == '__main__':
 	main()

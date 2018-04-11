@@ -1,6 +1,7 @@
 # Alexander Li
 # alexlive
 from nltk.stem.porter import *
+import string
 import nltk
 import sys
 import string
@@ -43,7 +44,8 @@ def stemWords(tokens):
 
 def preprocess(text, ngram=1):
 	loadStopwords()
-	data = text.lower().strip()
+	translator = str.maketrans('', '', string.punctuation)
+	data = text.lower().strip().translate(translator)
 	# tokenize
 	tokens = tokenizeText(data)
 	# filter out stopwords

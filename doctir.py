@@ -14,7 +14,7 @@ def prepare_illnesses(filenames):
 def main():
     illness_files = ['mayoclinic.txt']
     illnesses = prepare_illnesses(illness_files)
-    vsm = VectorSpaceModel()
+    vsm = VectorSpaceModel(doc_wt_scheme='tfc', query_wt_scheme='nfx')
     tokens = {}
     for illness in illnesses:
         tokens[illness] = preprocess(illnesses[illness]['text'], 2)
@@ -23,13 +23,14 @@ def main():
             tokens[illness].extend(preprocess(symptom, 2))
             tokens[illness].extend(preprocess(symptom))
 
-    print(tokens)
     vsm.prepare(tokens)
 
 
     while True:
         query = input('Enter your query: ')
         print('Retrieving possible illnesses...')
+        print(query)
+        print(preprocess(query))
         print(vsm.retrieve_ranked_docs(preprocess(query, 2) + preprocess(query)))
 
 if __name__ == '__main__':

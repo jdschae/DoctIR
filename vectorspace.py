@@ -1,9 +1,11 @@
 from collections import Counter, defaultdict
 from math import log, sqrt
 
+
 # Defined so that pickle can serialize the defaultdicts in VectorSpaceModel
 def defaultdict_float():
     return defaultdict(float)
+
 
 # TODO: weight symptoms more than text
 # hyperparameters

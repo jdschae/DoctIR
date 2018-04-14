@@ -22,11 +22,14 @@ def prepare_vector_space_model():
     tokens = {}
     for data in sources:
         for illness in data:
-            tokens[illness] = preprocess(data[illness]['text'], 2)
-            tokens[illness].extend(preprocess(data[illness]['text']))
-            for symptom in data[illness]['symptoms_list']:
-                tokens[illness].extend(preprocess(symptom, 2))
-                tokens[illness].extend(preprocess(symptom))
+            if len(data[illness]['symptoms_list']):
+                for symptom in data[illness]['symptoms_list']:
+                    tokens[illness] = preprocess(symptom, 2)
+                    tokens[illness].extend(preprocess(symptom))
+            else:
+                tokens[illness] = preprocess(data[illness]['text'], 2)
+                tokens[illness].extend(preprocess(data[illness]['text']))
+
 
     vsm.prepare(tokens)
     return vsm

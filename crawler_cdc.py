@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import time
 import requests
 import sys
+import json
 try:
     import urllib.request as urllib2
 except ImportError:
@@ -17,7 +18,7 @@ DB = {}
 
 def scrapePage(url, desc):
     global QUEUE
-    #print('@@@ ScrapePage: {}'.format(url))
+    print('@@@ ScrapePage: {}'.format(url))
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     removedOne = False
@@ -29,6 +30,10 @@ def scrapePage(url, desc):
         # printList = []
         ##print h1[0].text
         for h3 in h3s:
+            if desc not in DB:
+                DB[desc] = {}
+                DB[desc]['text'] = ""
+                DB[desc]['symptoms_list'] = []
             if (('Symptoms' in h3.text) or ('symptoms' in h3.text) or ('Signs' in h3.text) or ('signs' in h3.text)):
                 #print('h3', h3.text)
                 if('Recognize' in h3.text):
@@ -37,10 +42,9 @@ def scrapePage(url, desc):
                 symptoms_list = h3.findNext('ul')
                 next_para = h3.findNext('p')
                 if (next_para in all_tags) and (all_tags.index(next_para) - all_tags.index(h3)) == 1:
-                    if desc not in DB:
-                        DB[desc] = {}
-                        DB[desc]['text'] = []
-                    DB[desc]['text'].append(next_para.text)
+                    if 'brochure' not in next_para.text:
+                        if len(DB[desc]['text']) == 0:
+                            DB[desc]['text'] = next_para.text
                 # else:
                 #     print('p not right')
                 tagDif = all_tags.index(symptoms_list) - all_tags.index(h3)
@@ -48,17 +52,15 @@ def scrapePage(url, desc):
                     #print(tagDif)
                     symptoms = symptoms_list.find_all('li')
                     toAppend = []
-                    if desc not in DB:
-                        DB[desc] = {}
-                        DB[desc]['text'] = []
                     for symp in symptoms:
-                        if ('Diagnosis' in symp.text) or ('Prevention' in symp.text) or ('diagnos' in symp.text) or ('Vaccination' in symp.text) or ("Vital Signs" in symp.text) or ("References" in symp.text):
+                        if (('Diagnosis' in symp.text) or ('Prevention' in symp.text) or ('diagnos' in symp.text) or ('Vaccination' in symp.text) or ("Vital Signs" in symp.text) or ("References" in symp.text)):
                             #print('diagnosis break')
                             removedOne = True
                             break
-                        toAppend.append('\t{}'.format(symp.text))
+                        toAppend.append(symp.text)
                     for word in toAppend:
-                        DB[desc]['text'].append(word)
+                        if word not in DB[desc]['symptoms_list']:
+                            DB[desc]['symptoms_list'].append(word)
                     addedOne = True
 
                 # else:
@@ -71,14 +73,16 @@ def scrapePage(url, desc):
                     if desc not in DB:
                         DB[desc] = {}
                         DB[desc]['text'] = []
+                        DB[desc]['symptoms_list'] = []
                     addedOne = True
                     eachSymp = symptList.find_all('li')
                     for symp in eachSymp:
-                        DB[desc]['text'].append('\t{}'.format(symp.text))
+                        if symp not in DB[desc]['symptoms_list']:
+                            DB[desc]['symptoms_list'].append(symp.text)
 
-        if (not removedOne) and addedOne:
-            # DB[desc]['text'].append(printList)
-            print(desc, DB[desc]['text'])
+        # if (not removedOne) and addedOne:
+        #     # DB[desc]['text'].append(printList)
+        #     print(desc, DB[desc]['text'])
         linksOnPage = soup.find_all('a', href = True)
         results = []
         numLinksSeen = 0
@@ -96,6 +100,9 @@ def scrapePage(url, desc):
                     numLinksSeen += 1
         if numLinksSeen > 0:
             QUEUE += results
+
+        # if (DB[desc]['text'] == "") and (len(DB[desc]['symptoms_list']) == 0):
+        #     DB.pop(desc)
 
     except UnicodeEncodeError:
         x = 2
@@ -150,4 +157,13 @@ def crawlPages(seed_url):
 			scrapePage(current_url, t)
 
 if __name__ == '__main__':
-	crawlPages('https://www.cdc.gov/diseasesconditions/index.html')
+    crawlPages('https://www.cdc.gov/diseasesconditions/index.html')
+    copyDict = DB.copy()
+    for illness in copyDict:
+        if (DB[illness]['text'] == "") and (len(DB[illness]['symptoms_list']) == 0):
+            DB.pop(illness)
+    DB.pop("Yellow Fever")
+    print(DB)
+    print('length of DB: ', len(DB))
+    with open('cdc.txt', 'w') as outfile:
+        json.dump(DB, outfile)

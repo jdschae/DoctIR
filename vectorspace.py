@@ -123,7 +123,8 @@ class VectorSpaceModel():
                 f = self.__coll_freq_comp[token]
                 weights[token] = query_token_freqs[token] * f
         elif self.query_wt_scheme == 'nfx':
-            max_freq = query_token_freqs.most_common(1)[1]
+            if len(query_token_freqs):
+                max_freq = query_token_freqs.most_common(1)[0][1]
             for token, freq in query_token_freqs.items():
                 f = self.__coll_freq_comp[token]
                 weights[token] = (0.5 + 0.5 * freq / max_freq) * f

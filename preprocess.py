@@ -22,14 +22,6 @@ def loadStopwords():
 def tokenizeText(text):
 	return nltk.word_tokenize(text)
 
-# convert list to freq dict
-def dictify(tokens, dic = {}):
-	for t in tokens:
-		if t not in dic:
-			dic[t] = 0
-		dic[t] += 1
-	return dic[t]
-
 # remove stopwords
 def removeStopwords(data):
 	return [i for i in data if i not in STOPWORDS]
@@ -53,7 +45,7 @@ def preprocess(text, ngram=1):
 	# stem tokens
 	stemmed = stemWords(filtered)
 	results = []
-	for i in range(ngram, len(stemmed)):
+	for i in range(ngram, len(stemmed)+1):
 		results.append(' '.join(stemmed[i-ngram:i]))
 	return results
 

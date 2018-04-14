@@ -60,6 +60,12 @@ class VectorSpaceModel():
         self.__calc_doc_weights()
         self.__calc_doc_norms()
 
+        if self.__doc_wt_scheme[2] == 'c':
+            # Normalize doc vectors using Euclidean length
+            for token in self.__inverted_idx:
+                for doc_id in self.__inverted_idx[token]:
+                    self.__doc_weights[doc_id][token] /= self.__doc_norms[doc_id]
+
     def __index_docs(self, doc_tokens):
         '''
         Updates the inverted index with tokens from 'doc_tokens'.
@@ -71,7 +77,7 @@ class VectorSpaceModel():
                 self.__inverted_idx[token][doc_id] += token_freqs[token]
 
     def __calc_doc_weights(self):
-        if self.__doc_wt_scheme == 'tfx':
+        if self.__doc_wt_scheme == 'tfx' or self.__doc_wt_scheme == 'tfc':
             corpus_size = len(self.docs)
             for token in self.__inverted_idx:
                 doc_freq = float(len(self.__inverted_idx[token]))
@@ -116,6 +122,11 @@ class VectorSpaceModel():
             for token in query_token_freqs:
                 f = self.__coll_freq_comp[token]
                 weights[token] = query_token_freqs[token] * f
+        elif self.query_wt_scheme == 'nfx':
+            max_freq = query_token_freqs.most_common(1)[1]
+            for token, freq in query_token_freqs.items():
+                f = self.__coll_freq_comp[token]
+                weights[token] = (0.5 + 0.5 * freq / max_freq) * f
 
         return weights
 

@@ -1,6 +1,10 @@
 from collections import Counter, defaultdict
 from math import log, sqrt
 
+# Defined so that pickle can serialize the defaultdicts in VectorSpaceModel
+def defaultdict_float():
+    return defaultdict(float)
+
 # TODO: weight symptoms more than text
 # hyperparameters
 class VectorSpaceModel():
@@ -15,10 +19,10 @@ class VectorSpaceModel():
         vsm.retrieve_ranked_docs(query)     # get doc_ids ranked by relevance
     '''
     def __init__(self, doc_wt_scheme='tfx', query_wt_scheme='tfx'):
-        self.__inverted_idx = defaultdict(lambda: defaultdict(float))
+        self.__inverted_idx = defaultdict(defaultdict_float)
         self.__doc_wt_scheme = doc_wt_scheme
         self.__query_wt_scheme = query_wt_scheme
-        self.__doc_weights = defaultdict(lambda: defaultdict(float))
+        self.__doc_weights = defaultdict(defaultdict_float)
         self.__doc_norms = defaultdict(float)
         self.__coll_freq_comp = defaultdict(float)
         self.docs = set()

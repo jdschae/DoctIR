@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup
-import time
 import requests
-import sys
 from string import ascii_uppercase
 import json
 import queue
@@ -118,7 +116,7 @@ def scrapeWiki(base, wiki_data, link):
 
             if is_symptom:
                 wiki_data[link.text]['symptoms_list'].append(tag.text)
-            else:
+            elif tag.name == 'ul' or tag.name == 'p':
                 wiki_data[link.text]['text'] += ' ' + tag.text
     except:
         print(link['href'] + " failed")

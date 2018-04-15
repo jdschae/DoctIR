@@ -1,0 +1,1 @@
+[['Insomnia', 'Blood in urine', 'Itching'], ['Hair loss'], ['Low back pain', 'Abdominal pain'], ['Rash', 'Diarrhea', 'Vaginal discharge'], ['Nosebleed', 'Edema'], ['Hiccups', 'Increase in blood pressure', 'Discolored skin patches'], ['Anxiety'], ['Sneezing', 'Joint pain'], ['Back pain', 'Abdominal pain', 'Vertigo'], ['Diarrhea', 'Low blood pressure', 'Chills']]

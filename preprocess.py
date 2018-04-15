@@ -34,7 +34,7 @@ def stemWords(tokens):
 		result.append(inst.stem(t))
 	return result
 
-def preprocess(text, ngram=1):
+def preprocess(text, ngram=1, stem=True):
 	loadStopwords()
 	translator = str.maketrans('', '', string.punctuation)
 	data = text.lower().strip().translate(translator)
@@ -43,7 +43,9 @@ def preprocess(text, ngram=1):
 	# filter out stopwords
 	filtered = removeStopwords(tokens)
 	# stem tokens
-	stemmed = stemWords(filtered)
+	stemmed = filtered
+	if stem:
+		stemmed = stemWords(filtered)
 	results = []
 	for i in range(ngram, len(stemmed)+1):
 		results.append(' '.join(stemmed[i-ngram:i]))

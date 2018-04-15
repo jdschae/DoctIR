@@ -63,8 +63,11 @@ class VectorSpaceModel():
             doc_tokens[<doc_id>] = [<list of tokens>]
         '''
         self.__index_docs(doc_tokens)
+        print('Indexing complete!')
         self.__calc_doc_weights()
+        print('Weighing complete!')
         self.__calc_doc_norms()
+        print('Norming complete!')
 
         if self.__doc_wt_scheme[2] == 'c':
             # Normalize doc vectors using Euclidean length
@@ -119,8 +122,8 @@ class VectorSpaceModel():
 
         query_weights = self.__calc_query_weights(query_token_freqs)
         similarities = self.__calc_similarities(relevant_docs_ids, query_weights)
-
-        return sorted(similarities, key=similarities.get, reverse=True)
+        sorted_docs = sorted(similarities, key=similarities.get, reverse=True)
+        return [(id, similarities[id]) for id in sorted_docs]
 
     def __calc_query_weights(self, query_token_freqs):
         weights = defaultdict(float)

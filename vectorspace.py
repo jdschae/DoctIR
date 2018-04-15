@@ -2,11 +2,6 @@ from collections import Counter, defaultdict
 from math import log, sqrt
 
 
-# Defined so that pickle can serialize the defaultdicts in VectorSpaceModel
-def defaultdict_float():
-    return defaultdict(float)
-
-
 # TODO: weight symptoms more than text
 # hyperparameters
 class VectorSpaceModel():
@@ -21,10 +16,10 @@ class VectorSpaceModel():
         vsm.retrieve_ranked_docs(query)     # get doc_ids ranked by relevance
     '''
     def __init__(self, doc_wt_scheme='tfx', query_wt_scheme='tfx'):
-        self.__inverted_idx = defaultdict(defaultdict_float)
+        self.__inverted_idx = defaultdict(lambda: defaultdict(float))
         self.__doc_wt_scheme = doc_wt_scheme
         self.__query_wt_scheme = query_wt_scheme
-        self.__doc_weights = defaultdict(defaultdict_float)
+        self.__doc_weights = defaultdict(lambda: defaultdict(float))
         self.__doc_norms = defaultdict(float)
         self.__coll_freq_comp = defaultdict(float)
         self.docs = set()
@@ -84,13 +79,18 @@ class VectorSpaceModel():
             token_freqs = Counter(tokens)
             for token in token_freqs:
                 self.__inverted_idx[token][doc_id] += token_freqs[token]
+                if token_freqs[token] == 0:
+                    print('oh no', token)
 
     def __calc_doc_weights(self):
         if self.__doc_wt_scheme == 'tfx' or self.__doc_wt_scheme == 'tfc':
             corpus_size = len(self.docs)
             for token in self.__inverted_idx:
                 doc_freq = float(len(self.__inverted_idx[token]))
-                self.__coll_freq_comp[token] = log(corpus_size / doc_freq)
+                if doc_freq:
+                    self.__coll_freq_comp[token] = log(corpus_size / doc_freq)
+                else:
+                    print('how is the doc freq 0 for "{}"?????'.format(token))
 
                 f =  self.__coll_freq_comp[token]
                 for doc_id in self.__inverted_idx[token]:
@@ -117,13 +117,14 @@ class VectorSpaceModel():
         query_token_freqs = Counter(query)
         relevant_docs_ids = set()
         for token in query_token_freqs:
-            for doc_id in self.__inverted_idx[token]:
-                relevant_docs_ids.add(doc_id)
+            if token in self.__inverted_idx:
+                for doc_id in self.__inverted_idx[token]:
+                    relevant_docs_ids.add(doc_id)
 
         query_weights = self.__calc_query_weights(query_token_freqs)
         similarities = self.__calc_similarities(relevant_docs_ids, query_weights)
         sorted_docs = sorted(similarities, key=similarities.get, reverse=True)
-        return [(id, similarities[id]) for id in sorted_docs]
+        return [(doc_id, similarities[doc_id]) for doc_id in sorted_docs]
 
     def __calc_query_weights(self, query_token_freqs):
         weights = defaultdict(float)

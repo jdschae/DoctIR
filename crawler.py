@@ -110,7 +110,7 @@ def scrapeWiki(base, wiki_data, link):
         info_tag = disease_soup.find('div', class_='mw-parser-output')
         wiki_data[link.text] = {'text': "", 'symptoms_list': []}
         is_symptom = False
-        for tag in info_tag.find_all():
+        for tag in info_tag.find_all(recursive=False):
             if tag.name == 'h2':
                 is_symptom = 'symptoms' in tag.text.lower()
 

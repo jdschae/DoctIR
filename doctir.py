@@ -16,16 +16,16 @@ def read_illness_data(filenames):
 
 def get_tokens(files):
     sources = read_illness_data(files)
-    text_tokens = defaultdict(list)
-    symptoms_tokens = defaultdict(list)
+    text_tokens = {}
+    symptoms_tokens = {}
     for data in sources:
         for illness in data:
             if len(data[illness]['symptoms_list']):
                 for symptom in data[illness]['symptoms_list']:
-                    symptoms_tokens[illness].extend(preprocess(symptom))
+                    symptoms_tokens[illness] = preprocess(symptom)
                     symptoms_tokens[illness].extend(preprocess(symptom, 2))
             else:
-                text_tokens[illness].extend(preprocess(data[illness]['text']))
+                text_tokens[illness] = preprocess(data[illness]['text'])
                 text_tokens[illness].extend(preprocess(data[illness]['text'], 2))
 
     return text_tokens, symptoms_tokens
@@ -51,15 +51,16 @@ def prepare_vector_space_model():
         print('Done!')
 
     wiki_model = 'wiki_model.pkl'
-    text_tokens, merged_symptoms = get_tokens(['wikipedia.txt'])
     if os.path.isfile(wiki_model):
         print('Loading Wikipedia vector space model...')
         with open(wiki_model, 'rb') as infile:
             vsm = dill.load(infile)
     else:
-        print('Creating Wikipedia text vector space model...')
+        print('Creating Wikipedia vector space model...')
         vsm = VectorSpaceModel(doc_wt_scheme='tfc', query_wt_scheme='nfx')
-        vsm.prepare(text_tokens, 1.)
+        text_tokens, symptoms_tokens = get_tokens(['wikipedia.txt'])
+        vsm.prepare(text_tokens, 1., True)
+        vsm.prepare(symptoms_tokens, 2.)
         print('Dumping...')
         with open(wiki_model, 'wb') as outfile:
             dill.dump(vsm, outfile)
@@ -70,13 +71,16 @@ def prepare_vector_space_model():
     illness_files = ['cdc.txt', 'mayoclinic.txt']
     sources = read_illness_data(illness_files)
 
+    merged_symptoms = defaultdict(list)
     merged_text = defaultdict(list)
     for data in sources:
         for illness in data:
             query = preprocess(illness) + preprocess(illness, 2)
             results = vsm.retrieve_ranked_docs(query)
             if len(results):
+                #print('Query: {}; Returned: {}'.format(query, results[0]))
                 normed_illness = results[0][0]
+                print(query, results[0])
             else:
                 normed_illness = illness
             print('Actual illness: {}'.format(illness))
@@ -90,7 +94,7 @@ def prepare_vector_space_model():
                 merged_text[normed_illness].extend(preprocess(data[illness]['text'], 2))
 
     vsm.prepare(merged_text, 1., True)
-    vsm.prepare(merged_symptoms, 4.)
+    vsm.prepare(merged_symptoms, 2.)
     print('Dumping...')
     with open(combined_model, 'wb') as outfile:
         dill.dump(vsm, outfile)
@@ -104,7 +108,7 @@ def main():
     while True:
         query = input('Enter your query: ')
         print('Retrieving possible illnesses...')
-        print(vsm.retrieve_ranked_docs(preprocess(query) + preprocess(query, 2))[:10])
+        print(vsm.retrieve_ranked_docs(preprocess(query) + preprocess(query, 2), 'euclid')[:10])
 
 if __name__ == '__main__':
     main()

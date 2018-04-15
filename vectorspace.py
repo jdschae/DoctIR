@@ -112,7 +112,7 @@ class VectorSpaceModel():
 
         return sqrt(norm)
 
-    def retrieve_ranked_docs(self, query):
+    def retrieve_ranked_docs(self, query, sim_scheme='cosine'):
         '''
         Retrieves a list of the doc ids sorted by descending relevance
         '''
@@ -126,7 +126,7 @@ class VectorSpaceModel():
                     relevant_docs_ids.add(doc_id)
 
         query_weights = self.__calc_query_weights(query_token_freqs)
-        similarities = self.__calc_similarities(relevant_docs_ids, query_weights)
+        similarities = self.__calc_similarities(relevant_docs_ids, query_weights, sim_scheme)
         sorted_docs = sorted(similarities, key=similarities.get, reverse=True)
         return [(doc_id, similarities[doc_id]) for doc_id in sorted_docs]
 
@@ -145,14 +145,18 @@ class VectorSpaceModel():
 
         return weights
 
-    def __calc_similarities(self, relevant_docs_ids, query_weights):
+    def __calc_similarities(self, relevant_docs_ids, query_weights, scheme='cosine'):
         similarities = defaultdict(float)
+
         query_norm = self.__norm(query_weights.values())
         for doc_id in relevant_docs_ids:
             inner_product = 0.
             for token, query_weight in query_weights.items():
                 inner_product += query_weight * self.__doc_weights[doc_id][token]
+                if scheme == 'cosine':
+                    similarities[doc_id] = inner_product / self.__doc_norms[doc_id] / query_norm
+                elif scheme == 'euclid':
+                    similarities[doc_id] = -(self.__doc_norms[doc_id] ** 2 - 2 * inner_product + query_norm ** 2)
 
-            similarities[doc_id] = inner_product / self.__doc_norms[doc_id] / query_norm
 
         return similarities

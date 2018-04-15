@@ -42,6 +42,9 @@ class VectorSpaceModel():
         self.__check_wt_scheme(wt_scheme)
         self.__query_wt_scheme = wt_scheme
 
+    def print_inverted_idx(self, token):
+        print(self.__inverted_idx[token])
+
     def __check_wt_scheme(self, wt_scheme):
         if (len(wt_scheme) != 3 or
             wt_scheme[0] not in 'btn' or
@@ -50,27 +53,30 @@ class VectorSpaceModel():
             # Accepted schemes are ones from Salton's paper.
             raise Exception('Invalid weighting scheme')
 
-    def prepare(self, doc_tokens):
+    def prepare(self, doc_tokens, idx_weight, only_index=False):
         '''
         Prepares the vector space model for doc retrieval.
         'doc_tokens' is expected to be a dictionary containing the tokens of
         all the docs and defined as follows:
             doc_tokens[<doc_id>] = [<list of tokens>]
         '''
-        self.__index_docs(doc_tokens)
+        self.__index_docs(doc_tokens, idx_weight)
         print('Indexing complete!')
-        self.__calc_doc_weights()
-        print('Weighing complete!')
-        self.__calc_doc_norms()
-        print('Norming complete!')
 
-        if self.__doc_wt_scheme[2] == 'c':
-            # Normalize doc vectors using Euclidean length
-            for token in self.__inverted_idx:
-                for doc_id in self.__inverted_idx[token]:
-                    self.__doc_weights[doc_id][token] /= self.__doc_norms[doc_id]
+        if not only_index:
+            self.__calc_doc_weights()
+            print('Weighing complete!')
+            self.__calc_doc_norms()
+            print('Norming complete!')
 
-    def __index_docs(self, doc_tokens):
+            if self.__doc_wt_scheme[2] == 'c':
+                # Normalize doc vectors using Euclidean length
+                for token in self.__inverted_idx:
+                    for doc_id in self.__inverted_idx[token]:
+                        self.__doc_weights[doc_id][token] /= self.__doc_norms[doc_id]
+            print('All preparations complete!')
+
+    def __index_docs(self, doc_tokens, idx_weight):
         '''
         Updates the inverted index with tokens from 'doc_tokens'.
         '''
@@ -78,9 +84,7 @@ class VectorSpaceModel():
             self.docs.add(doc_id)
             token_freqs = Counter(tokens)
             for token in token_freqs:
-                self.__inverted_idx[token][doc_id] += token_freqs[token]
-                if token_freqs[token] == 0:
-                    print('oh no', token)
+                self.__inverted_idx[token][doc_id] += token_freqs[token] * idx_weight
 
     def __calc_doc_weights(self):
         if self.__doc_wt_scheme == 'tfx' or self.__doc_wt_scheme == 'tfc':

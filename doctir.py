@@ -61,7 +61,7 @@ def prepare_vector_space_model():
     print('Done!')
     print('Creating combined vector space model...')
 
-    #Merging illnesses-
+    #Merging illnesses
     illness_files = ['cdc.txt', 'mayoclinic.txt']
     sources = read_illness_data(illness_files)
 

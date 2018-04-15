@@ -54,7 +54,6 @@ def prepare_vector_space_model():
             pickle.dump(vsm, outfile, -1)
 
     #Merging illnesses
-    get_tokens(['wikipedia.txt'])
     illness_files = ['cdc.txt', 'mayoclinic.txt']
     sources = read_illness_data(illness_files)
 

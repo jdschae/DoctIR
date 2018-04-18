@@ -12,9 +12,9 @@ Python packages:
 
 Before our program can be run, you must have the illness dataset to build the
 vector space model. The dataset is included with our submission, but if you need
-to obtain it again, then you can run our crawler:
+to obtain it again, then you can run our web scraper:
 
-$ python crawler.py
+$ python scraper.py
 
 This script will create JSON files containing data from www.wikipedia.org,
 www.cdc.gov, and www.mayoclinic.org. These files are named wikipedia.json,

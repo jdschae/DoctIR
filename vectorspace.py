@@ -2,8 +2,6 @@ from collections import Counter, defaultdict
 from math import log, sqrt
 
 
-# TODO: weight symptoms more than text
-# hyperparameters
 class VectorSpaceModel():
     '''
     Retrieves documents using a vector space model.

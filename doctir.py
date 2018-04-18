@@ -2,7 +2,6 @@ import os
 from vectorspace import *
 from preprocess import *
 from ast import literal_eval
-from nltk.corpus import wordnet as wn
 import dill
 from collections import defaultdict
 
@@ -127,7 +126,7 @@ def main():
     vsm = prepare_vector_space_model()
     print('Copyright\u00a9 doctIR')
     while True:
-        query = input('Enter your query: ')
+        query = input('Enter your symptoms: ')
         print('Retrieving possible illnesses...')
         illnesses = vsm.retrieve_ranked_docs(preprocess(query) + preprocess(query, 2))
         print('Displaying {} out of {} results.'.format(min(10, len(illnesses)), len(illnesses)))

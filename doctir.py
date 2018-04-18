@@ -1,8 +1,6 @@
-import os
 from vectorspace import *
 from preprocess import *
 from ast import literal_eval
-from nltk.corpus import wordnet as wn
 import dill
 from collections import defaultdict
 
@@ -61,7 +59,7 @@ def prepare_vector_space_model():
     # Otherwise, create it and then save it.
     wiki_model = 'wiki_model.pkl'
     print('Reading Wikipedia text and symptoms tokens...')
-    wiki_text, wiki_symptoms = get_tokens(['wikipedia.txt'])
+    wiki_text, wiki_symptoms = get_tokens(['wikipedia.json'])
     print('Done!')
     if os.path.isfile(wiki_model):
         print('Loading Wikipedia vector space model...')
@@ -80,7 +78,8 @@ def prepare_vector_space_model():
     print('Creating combined vector space model...')
 
     # Merging illnesses
-    illness_files = ['cdc.txt', 'mayoclinic.txt']
+    illness_files = ['cdc.json', 'mayoclinic.json']
+
     sources = read_illness_data(illness_files)
     merged_symptoms = defaultdict(list)
     merged_text = defaultdict(list)

@@ -61,7 +61,7 @@ def prepare_vector_space_model():
     else:
         print('Creating Wikipedia vector space model...')
         vsm = VectorSpaceModel(doc_wt_scheme='tfc', query_wt_scheme='nfx')
-        text_tokens, symptoms_tokens = get_tokens(['wikipedia.txt'])
+        text_tokens, symptoms_tokens = get_tokens(['wikipedia.json'])
         vsm.prepare(text_tokens, 1., True)
         vsm.prepare(symptoms_tokens, 2.)
         print('Dumping...')
@@ -71,7 +71,7 @@ def prepare_vector_space_model():
     print('Creating combined vector space model...')
 
     #Merging illnesses
-    illness_files = ['cdc.txt', 'mayoclinic.txt']
+    illness_files = ['cdc.json', 'mayoclinic.json']
     sources = read_illness_data(illness_files)
 
     merged_symptoms = defaultdict(list)

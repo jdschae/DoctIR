@@ -1,0 +1,295 @@
+Loading combined vector space model...
+
+Next Query:  chest pain shortness breath shoulder pain cough
+benchmark:  acute respiratory distress syndrome ; output:  acute respiratory distress syndrome
+benchmark:  sarcoidosis ; output:  sarcoidosis
+benchmark:  asthma ; output:  occupational asthma - chemicals and materials
+benchmark:  emphysema ; output:  emphysema
+benchmark:  bronchitis ; output:  chronic bronchitis
+benchmark:  aspergillosis ; output:  allergic bronchopulmonary aspergillosis
+benchmark:  idiopathic pulmonary fibrosis ; output:  idiopathic pulmonary fibrosis
+benchmark:  non-hodgkin lymphoma ; output:  non-hodgkin lymphoma
+benchmark:  myocarditis ; output:  infectious myocarditis
+benchmark:  lung cancer ; output:  lung cancer
+benchmark:  esophagitis ; output:  reflux esophagitis
+benchmark:  angina ; output:  prinzmetal's variant angina
+benchmark:  pulmonary edema ; output:  pulmonary edema of mountaineers
+benchmark:  aortic aneurysm ; output:  abdominal aortic aneurysm
+benchmark:  common cold ; output:  common cold
+benchmark:  bacterial pneumonia ; output:  bacterial pneumonia
+benchmark:  heart attack ; output:  heart attack
+benchmark:  sickle cell anemia ; output:  sickle cell anemia
+benchmark:  histoplasmosis ; output:  ocular histoplasmosis
+benchmark:  wegener's granulomatosis ; output:  wegener's granulomatosis
+benchmark:  tuberculosis ; output:  tuberculosis, pulmonary
+benchmark:  influenza ; output:  influenza
+benchmark:  poisoning ; output:  shellfish poisoning
+benchmark:  tularemia ; output:  tularemia
+benchmark:  pleural effusion ; output:  pleural effusion
+
+Next Query:  fever chills headache fatigue muscle pain joint pain swollen lymph nodes rash heart palpitation numbness in feet numbness in hand tingling in feet tingling in hands
+benchmark:  aids ; output:  lymphoma, aids-related
+benchmark:  leukemia ; output:  chronic myelogenous leukemia
+benchmark:  herpes zoster ; output:  herpes zoster oticus
+benchmark:  poems ; output:  poems syndrome
+benchmark:  influenza ; output:  swine influenza
+benchmark:  systemic lupus erythematosus ; output:  systemic lupus erythematosus
+benchmark:  q fever ; output:  q fever
+benchmark:  kikuchi disease ; output:  kikuchi disease
+benchmark:  carpal tunnel syndrome ; output:  carpal tunnel syndrome
+benchmark:  sarcoidosis ; output:  sarcoidosis
+benchmark:  lyme disease ; output:  lyme disease
+benchmark:  leptospirosis ; output:  leptospirosis
+benchmark:  mononucleosis ; output:  epstein barr virus mononucleosis
+benchmark:  myocarditis ; output:  giant cell myocarditis
+benchmark:  shingles ; output:  shingles
+benchmark:  thrombocytosis ; output:  essential thrombocytosis
+benchmark:  bacterial meningitis ; output:  bacterial meningitis
+benchmark:  hypothyroidism ; output:  hypothyroidism
+benchmark:  non-hodgkin lymphoma ; output:  non-hodgkin lymphoma
+benchmark:  lemierre's syndrome ; output:  lemierre's syndrome
+benchmark:  endocarditis ; output:  bacterial endocarditis
+benchmark:  rocky mountain spotted fever ; output:  rocky mountain spotted fever
+benchmark:  dengue fever ; output:  dengue fever
+benchmark:  brucellosis ; output:  brucellosis
+benchmark:  cytomegalovirus ; output:  congenital cytomegalovirus
+benchmark:  hypocalcemia ; output:  hypocalcemia
+benchmark:  tularemia ; output:  tularemia
+benchmark:  aseptic meningitis ; output:  aseptic meningitis
+benchmark:  hiv ; output:  dementia, hiv
+benchmark:  food poisoning ; output:  bacterial food poisoning
+
+Next Query:  fever severe headache pain behind the eyes joint pain muscle pain fatigue nausea vomiting skin rash nose bleed bleeding gums
+benchmark:  leukemia ; output:  chronic myelogenous leukemia
+benchmark:  influenza ; output:  swine influenza
+benchmark:  systemic lupus erythematosus ; output:  systemic lupus erythematosus
+benchmark:  kikuchi disease ; output:  kikuchi disease
+benchmark:  lyme disease ; output:  lyme disease
+benchmark:  leptospirosis ; output:  leptospirosis
+benchmark:  hyperthermia ; output:  malignant hyperthermia
+benchmark:  crohn's disease ; output:  crohn's disease
+benchmark:  bacterial meningitis ; output:  bacterial meningitis
+benchmark:  migraine ; output:  migraine
+benchmark:  polyarteritis nodosa ; output:  polyarteritis nodosa
+benchmark:  bacterial pneumonia ; output:  bacterial pneumonia
+benchmark:  lemierre's syndrome ; output:  lemierre's syndrome
+benchmark:  rocky mountain spotted fever ; output:  rocky mountain spotted fever
+benchmark:  wegener's granulomatosis ; output:  wegener's granulomatosis
+benchmark:  dengue fever ; output:  dengue fever
+benchmark:  brucellosis ; output:  brucellosis
+benchmark:  appendicitis ; output:  appendicitis
+benchmark:  tularemia ; output:  tularemia
+benchmark:  west nile virus ; output:  west nile virus
+benchmark:  aseptic meningitis ; output:  aseptic meningitis
+
+Next Query:  fatigue headache sore throat chills fever muscle aches swollen lymph nodes jaundice skin rash abdominal soreness
+benchmark:  aids ; output:  lymphoma, aids-related
+benchmark:  leukemia ; output:  chronic myelogenous leukemia
+benchmark:  poisoning ; output:  mercury poisoning
+benchmark:  quinsy ; output:  quinsy
+benchmark:  influenza ; output:  swine influenza
+benchmark:  q fever ; output:  q fever
+benchmark:  kikuchi disease ; output:  kikuchi disease
+benchmark:  hepatitis a ; output:  hepatitis a
+benchmark:  lyme disease ; output:  lyme disease
+benchmark:  sarcoidosis ; output:  sarcoidosis, pulmonary
+benchmark:  leptospirosis ; output:  leptospirosis
+benchmark:  mononucleosis ; output:  epstein barr virus mononucleosis
+benchmark:  non-hodgkin lymphoma ; output:  non-hodgkin lymphoma
+benchmark:  diverticulitis ; output:  diverticulitis
+benchmark:  common cold ; output:  common cold
+benchmark:  lemierre's syndrome ; output:  lemierre's syndrome
+benchmark:  strep throat ; output:  strep throat
+benchmark:  rocky mountain spotted fever ; output:  rocky mountain spotted fever
+benchmark:  dengue fever ; output:  dengue fever
+benchmark:  brucellosis ; output:  brucellosis
+benchmark:  measles ; output:  measles
+benchmark:  cytomegalovirus ; output:  congenital cytomegalovirus
+benchmark:  pancreatic cancer ; output:  pancreatic cancer
+benchmark:  hepatitis b ; output:  hepatitis b
+benchmark:  appendicitis ; output:  appendicitis
+benchmark:  tularemia ; output:  tularemia
+benchmark:  west nile virus ; output:  west nile virus
+benchmark:  scarlet fever ; output:  scarlet fever
+benchmark:  hiv ; output:  hiv
+
+Next Query:  rapid heart rate dry mouth dry nose low blood pressure thirst muscle cramps dehydration
+benchmark:  diabetes insipidus ; output:  diabetes insipidus
+benchmark:  peritonitis ; output:  peritonitis
+benchmark:  addison's disease ; output:  addison's disease
+benchmark:  cholera ; output:  cholera
+benchmark:  bacterial pneumonia ; output:  bacterial pneumonia
+benchmark:  hypokalemia ; output:  hypokalemia
+benchmark:  bartter syndrome ; output:  bartter syndrome, classic form
+benchmark:  pancreatitis ; output:  acute pancreatitis
+benchmark:  appendicitis ; output:  appendicitis
+benchmark:  diabetic neuropathy ; output:  diabetic neuropathy
+benchmark:  periodic paralysis ; output:  familial periodic paralysis
+benchmark:  adrenal cancer ; output:  adrenal cancer
+benchmark:  generalized anxiety disorder ; output:  generalized anxiety disorder
+
+Next Query:  cold sore burning urinating swollen lymph nodes fever headaches itching genitals backaches fatigue
+benchmark:  aids ; output:  lymphoma, aids-related
+benchmark:  leukemia ; output:  chronic myelogenous leukemia
+benchmark:  osteomyelitis ; output:  osteomyelitis
+benchmark:  influenza ; output:  swine influenza
+benchmark:  sarcoidosis ; output:  sarcoidosis, pulmonary
+benchmark:  mononucleosis ; output:  epstein barr virus mononucleosis
+benchmark:  prostatitis ; output:  prostatitis
+benchmark:  tuberculous meningitis ; output:  tuberculous meningitis
+benchmark:  migraine ; output:  migraine
+benchmark:  non-hodgkin lymphoma ; output:  non-hodgkin lymphoma
+benchmark:  common cold ; output:  common cold
+benchmark:  endocarditis ; output:  bacterial endocarditis
+benchmark:  cluster headache ; output:  cluster headache
+benchmark:  dengue fever ; output:  dengue fever
+benchmark:  tuberculosis ; output:  tuberculosis, pulmonary
+benchmark:  brucellosis ; output:  brucellosis
+benchmark:  cytomegalovirus ; output:  congenital cytomegalovirus
+benchmark:  tularemia ; output:  tularemia
+benchmark:  herpes simplex ; output:  herpes simplex disease
+benchmark:  genital herpes ; output:  congenital herpes simplex
+benchmark:  hiv ; output:  hiv
+
+Next Query:  cough sore throat restlessness hallucinations seizures coma
+benchmark:  epilepsy ; output:  epilepsy benign neonatal familial
+benchmark:  plague ; output:  plague, bubonic
+benchmark:  asthma ; output:  occupational asthma - chemicals and materials
+benchmark:  rabies ; output:  rabies
+benchmark:  common cold ; output:  common cold
+benchmark:  delirium tremens ; output:  delirium tremens
+benchmark:  tuberculosis ; output:  tuberculosis, pulmonary
+benchmark:  pancreatic cancer ; output:  pancreatic cancer
+benchmark:  influenza ; output:  influenza
+benchmark:  poisoning ; output:  shellfish poisoning
+benchmark:  tularemia ; output:  tularemia
+benchmark:  aseptic meningitis ; output:  aseptic meningitis
+
+Next Query:  anxiety sadness suicidal thoughts restlessness low energy poor concentration headaches trouble sleeping appetite loss
+benchmark:  hypoglycemia ; output:  reactive hypoglycemia
+benchmark:  hypertension ; output:  hypertension
+benchmark:  intoxication ; output:  cocaine intoxication
+benchmark:  dementia ; output:  dementia, alcohol
+benchmark:  migraine ; output:  migraine
+benchmark:  restless legs syndrome ; output:  restless legs syndrome
+benchmark:  schizophrenia ; output:  schizophrenia
+benchmark:  brucellosis ; output:  brucellosis
+benchmark:  alcohol withdrawal syndrome ; output:  alcohol withdrawal syndrome
+benchmark:  bipolar disorder ; output:  bipolar disorder
+benchmark:  poisoning ; output:  shellfish poisoning
+benchmark:  depression ; output:  post-partum depression
+benchmark:  attention deficit hyperactivity disorder ; output:  adult attention deficit hyperactivity disorder
+benchmark:  adrenal cancer ; output:  adrenal cancer
+benchmark:  celiac disease ; output:  celiac disease epilepsy occipital calcifications
+benchmark:  generalized anxiety disorder ; output:  generalized anxiety disorder
+benchmark:  asperger syndrome ; output:  asperger syndrome
+benchmark:  autism ; output:  autism
+
+Next Query:  blurred vision red eyes tearing eyes swollen lymph nodes hoarse voice cyst in bone kidney stones liver enlargement pericarditis arrhythmia heart failure meningitis seizures dementia depression psychosis
+benchmark:  hyperparathyroidism ; output:  primary hyperparathyroidism
+benchmark:  anemia ; output:  sideroblastic anemia, autosomal
+benchmark:  systemic lupus erythematosus ; output:  systemic lupus erythematosus
+benchmark:  conjunctivitis ; output:  conjunctivitis
+benchmark:  gout ; output:  juvenile gout
+benchmark:  sarcoidosis ; output:  sarcoidosis
+benchmark:  poisoning ; output:  cyanide poisoning
+benchmark:  whipple disease ; output:  whipple disease
+benchmark:  hypothyroidism ; output:  hypothyroidism
+benchmark:  brucellosis ; output:  brucellosis
+benchmark:  bipolar disorder ; output:  bipolar disorder
+benchmark:  tularemia ; output:  tularemia
+
+Next Query:  weight gain fatigue weakness difficulty thinking confusion trouble concentrating cold sensitivity depression paranoia hearing loss dry skin hair loss
+benchmark:  vitamin b12 deficiency ; output:  vitamin b12 deficiency
+benchmark:  hearing loss ; output:  sensorineural hearing loss
+benchmark:  cushing's syndrome ; output:  cushing's syndrome
+benchmark:  lyme disease ; output:  lyme disease
+benchmark:  sarcoidosis ; output:  sarcoidosis, pulmonary
+benchmark:  depression ; output:  depression (clinical)
+benchmark:  rhabdomyolysis ; output:  rhabdomyolysis
+benchmark:  hypothyroidism ; output:  congenital hypothyroidism
+benchmark:  syphilis ; output:  neurosyphilis
+benchmark:  attention deficit hyperactivity disorder ; output:  attention deficit hyperactivity disorder
+benchmark:  hypothermia ; output:  hypothermia
+benchmark:  brucellosis ; output:  brucellosis
+benchmark:  pancreatic cancer ; output:  pancreatic cancer
+benchmark:  bipolar disorder ; output:  bipolar disorder
+benchmark:  renal failure ; output:  chronic renal failure
+benchmark:  multiple sclerosis ; output:  multiple sclerosis
+benchmark:  intoxication ; output:  serious digitalis intoxication
+benchmark:  celiac disease ; output:  celiac disease epilepsy occipital calcifications
+
+query:  chest pain shortness breath shoulder pain cough
+Relevance:  0.46296296296296297
+Precision:  0.01749475157452764
+Reciprocal Rank: 1 /  72
+WebMD, Isabel Healthcare Overlap:  6  /  60
+Ouput size:  1429
+
+query:  fever chills headache fatigue muscle pain joint pain swollen lymph nodes rash heart palpitation numbness in feet numbness in hand tingling in feet tingling in hands
+Relevance:  0.5882352941176471
+Precision:  0.014705882352941176
+Reciprocal Rank: 1 /  11
+WebMD, Isabel Healthcare Overlap:  4  /  55
+Ouput size:  2040
+
+query:  fever severe headache pain behind the eyes joint pain muscle pain fatigue nausea vomiting skin rash nose bleed bleeding gums
+Relevance:  0.4375
+Precision:  0.007832898172323759
+Reciprocal Rank: 1 /  71
+WebMD, Isabel Healthcare Overlap:  1  /  49
+Ouput size:  2681
+
+query:  fatigue headache sore throat chills fever muscle aches swollen lymph nodes jaundice skin rash abdominal soreness
+Relevance:  0.6444444444444445
+Precision:  0.015916575192096598
+Reciprocal Rank: 1 /  15
+WebMD, Isabel Healthcare Overlap:  3  /  48
+Ouput size:  1822
+
+query:  rapid heart rate dry mouth dry nose low blood pressure thirst muscle cramps dehydration
+Relevance:  0.30952380952380953
+Precision:  0.006146572104018913
+Reciprocal Rank: 1 /  423
+WebMD, Isabel Healthcare Overlap:  0  /  42
+Ouput size:  2115
+
+query:  cold sore burning urinating swollen lymph nodes fever headaches itching genitals backaches fatigue
+Relevance:  0.4666666666666667
+Precision:  0.017826825127334467
+Reciprocal Rank: 1 /  6
+WebMD, Isabel Healthcare Overlap:  3  /  48
+Ouput size:  1178
+
+query:  cough sore throat restlessness hallucinations seizures coma
+Relevance:  0.21428571428571427
+Precision:  0.02023608768971332
+Reciprocal Rank: 1 /  2
+WebMD, Isabel Healthcare Overlap:  1  /  57
+Ouput size:  593
+
+query:  anxiety sadness suicidal thoughts restlessness low energy poor concentration headaches trouble sleeping appetite loss
+Relevance:  0.3829787234042553
+Precision:  0.010398613518197574
+Reciprocal Rank: 1 /  150
+WebMD, Isabel Healthcare Overlap:  3  /  50
+Ouput size:  1731
+
+query:  blurred vision red eyes tearing eyes swollen lymph nodes hoarse voice cyst in bone kidney stones liver enlargement pericarditis arrhythmia heart failure meningitis seizures dementia depression psychosis
+Relevance:  0.4
+Precision:  0.005338078291814947
+Reciprocal Rank: 1 /  68
+WebMD, Isabel Healthcare Overlap:  1  /  31
+Ouput size:  2248
+
+query:  weight gain fatigue weakness difficulty thinking confusion trouble concentrating cold sensitivity depression paranoia hearing loss dry skin hair loss
+Relevance:  0.33962264150943394
+Precision:  0.008200455580865604
+Reciprocal Rank: 1 /  225
+WebMD, Isabel Healthcare Overlap:  1  /  54
+Ouput size:  2195
+***************************
+avgRelevance:  0.4246220256914934
+avgPrecision 0.012409673960383397
+F-score:  0.024114593515419593
+Mean Reciprocal Rank:  0.08803968798314724

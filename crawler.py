@@ -5,7 +5,6 @@ import json
 import queue
 
 MAYO_BASE = 'https://www.mayoclinic.org'
-URLS = []
 SEEN = set()
 DB = {}
 
@@ -123,8 +122,12 @@ def scrapeWiki(base, wiki_data, link):
     return wiki_data
 
 if __name__ == '__main__':
-    with open('wikipedia.txt', 'w') as outfile:
+    with open('mayoclinic.json', 'w') as outfile:
+        crawlMayo('https://www.mayoclinic.org/diseases-conditions/index')
+        json.dump(DB, outfile)
+    with open('wikipedia.json', 'w') as outfile:
         json.dump(crawlWiki('https://en.wikipedia.org', 'https://en.wikipedia.org/wiki/List_of_diseases'), outfile)
+
         # crawlMayo('https://www.mayoclinic.org/diseases-conditions/index')
         # with open('mayoclinic.txt', 'w') as outfile:
         # 	json.dump(DB, outfile)

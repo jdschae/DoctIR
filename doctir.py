@@ -1,4 +1,3 @@
-import sys
 import os
 from vectorspace import *
 from preprocess import *
@@ -7,12 +6,14 @@ from nltk.corpus import wordnet as wn
 import dill
 from collections import defaultdict
 
+
 def read_illness_data(filenames):
     sources = []
     for filename in filenames:
         with open(filename) as file:
             sources.append(literal_eval(file.read()))
     return sources
+
 
 def get_tokens(files):
     sources = read_illness_data(files)
@@ -30,6 +31,7 @@ def get_tokens(files):
 
     return text_tokens, symptoms_tokens
 
+
 def expand_query(tokens):
     query = ''
     for token in tokens:
@@ -41,6 +43,7 @@ def expand_query(tokens):
         else:
             query += ' ' + token
     return query
+
 
 def prepare_vector_space_model():
     combined_model = 'model.pkl'
@@ -103,12 +106,42 @@ def prepare_vector_space_model():
     return vsm
 
 
+def is_yes(response):
+    return ''.join(response.split()).lower() == 'y'
+
+
+def disclaimer_understood():
+    print('DISCLAIMER: This program is not a substitute for the advice of a ' +
+          'real medical professional.')
+    response = input('Please state whether you understand this disclaimer [y/n]: ')
+    return is_yes(response)
+
+
 def main():
+    if not disclaimer_understood():
+        print('Terminating program')
+        return
+
     vsm = prepare_vector_space_model()
+    print('Copyright\u00a9 doctIR')
     while True:
         query = input('Enter your query: ')
         print('Retrieving possible illnesses...')
-        print(vsm.retrieve_ranked_docs(preprocess(query) + preprocess(query, 2), 'euclid')[:10])
+        illnesses = vsm.retrieve_ranked_docs(preprocess(query) + preprocess(query, 2))
+        print('Displaying {} out of {} results.'.format(min(10, len(illnesses)), len(illnesses)))
+        for i in range(0, len(illnesses), 10):
+            display_more = True
+            for j in range(i, min(i + 10, len(illnesses))):
+                print("\t{}. {}".format(j + 1, illnesses[j][0]))
+                if j == len(illnesses) - 1:
+                    display_more = False
+
+            if display_more:
+                response = input('\nDisplay 10 more results? [y/n]: ')
+                if not is_yes(response):
+                    break
+            else:
+                print('No more results.\n')
 
 if __name__ == '__main__':
     main()

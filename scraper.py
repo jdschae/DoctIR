@@ -85,44 +85,52 @@ def crawlMayo(seed_url):
 
 def crawlWiki(base, wiki_disease_base):
     wiki_data = {}
+    # For each list of diseases
     for c in list(ascii_uppercase) + ['0-9']:
-        print(c)
         base_url = wiki_disease_base + '_({})'.format(c)
         response = requests.get(base_url)
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        #print(soup.find_all('div', id='mw-content-text', dir='ltr'))
+        # For each info tag
         for child_tag in soup.find('div', class_='mw-parser-output').children:
             if child_tag.name == 'ul':
+
+                # For each disease
                 for disease_link_tag in child_tag.find_all('a'):
                     if disease_link_tag and disease_link_tag['href']:
+                        # Continue if page not created yet
                         if (disease_link_tag.has_attr('title') and '(page does not exist)' in disease_link_tag['title']) \
                                 or (disease_link_tag.has_attr('rel') and 'nofollow' in disease_link_tag['rel']):
                             continue
-                       # print(disease_link_tag)
+
+                        # Scrape page
                         wiki_data = scrapeWiki(base, wiki_data, disease_link_tag)
-
-                        #for tag in info_tag.find_all('ul'):
-
-                        #wiki_data[disease_link_tag.contents[0]] = info_tag.find_all('p') + info_tag.find_all('ul')
     return wiki_data
+
 def scrapeWiki(base, wiki_data, link):
+    # If can't access page, skip
     try:
         response = requests.get(base + link['href'])
         disease_soup = BeautifulSoup(response.text, 'html.parser')
         info_tag = disease_soup.find('div', class_='mw-parser-output')
+
         wiki_data[link.text] = {'text': "", 'symptoms_list': []}
         is_symptom = False
+
+        # For each child tag
         for tag in info_tag.find_all(recursive=False):
+            # If symptoms section
             if tag.name == 'h2':
                 is_symptom = 'symptoms' in tag.text.lower()
 
+            # Put info as either text or symptom
             if is_symptom:
                 wiki_data[link.text]['symptoms_list'].append(tag.text)
             elif tag.name == 'ul' or tag.name == 'p':
                 wiki_data[link.text]['text'] += ' ' + tag.text
     except:
         print(link['href'] + " failed")
+
     return wiki_data
 
 
@@ -219,9 +227,6 @@ def scrapePageCDC(url, desc):
         if numLinksSEENCDC > 0:
             QUEUECDC += results
 
-        # if (DBCDC[desc]['text'] == "") and (len(DBCDC[desc]['symptoms_list']) == 0):
-        #     DBCDC.pop(desc)
-
     except UnicodeEncodeError:
         x = 2
 
@@ -276,6 +281,7 @@ def crawlPagesCDC(seed_url):
 
 
 if __name__ == '__main__':
+    # Scraping each source and dumping into JSON
     with open('cdc.json', 'w') as outfile:
         crawlPagesCDC('https://www.cdc.gov/diseasesconditions/index.html')
         copyDict = DBCDC.copy()
@@ -289,8 +295,3 @@ if __name__ == '__main__':
         json.dump(DB, outfile)
     with open('wikipedia.json', 'w') as outfile:
         json.dump(crawlWiki('https://en.wikipedia.org', 'https://en.wikipedia.org/wiki/List_of_diseases'), outfile)
-
-
-        # crawlMayo('https://www.mayoclinic.org/diseases-conditions/index')
-        # with open('mayoclinic.txt', 'w') as outfile:
-        # 	json.dump(DB, outfile)

@@ -1,3 +1,6 @@
+doctIR
+John Schaefer, Alex Li, Michael Lee, Akash Ramanujam
+
 ======= Prerequisites =======
 
 Python 3.6+

@@ -15,7 +15,7 @@ Python packages:
 
 === Data collection / Web scraping ===
 
-Before our program can be run, you must have the illness dataset to build the
+Before our program can be run, you must have the illness dataset used to build the
 vector space model. The dataset is included with our submission, but if you need
 to obtain it again, then you can run our web scraper:
 

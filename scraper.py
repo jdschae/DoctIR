@@ -12,6 +12,7 @@ MAYO_BASE = 'https://www.mayoclinic.org'
 SEEN = set()
 DB = {}
 
+
 def scrapePage(url, desc):
     print('@@@ ScrapePage: {}'.format(url))
     response = requests.get(url)
@@ -37,6 +38,7 @@ def scrapePage(url, desc):
                 DB[desc]['symptoms_list'].append(symp.text)
                 print('\t{}'.format(symp.text))
 
+
 def scrapeList(url):
     print('### ScrapeList: {}'.format(url))
     response = requests.get(url)
@@ -52,6 +54,7 @@ def scrapeList(url):
             results.append((next_url, letter.text))
             print('Page:' + next_url)
     return results
+
 
 def crawlMayo(seed_url):
     # add to seen
@@ -83,6 +86,7 @@ def crawlMayo(seed_url):
         else:
             scrapePage(current_url, t)
 
+
 def crawlWiki(base, wiki_disease_base):
     wiki_data = {}
     for c in list(ascii_uppercase) + ['0-9']:
@@ -106,6 +110,8 @@ def crawlWiki(base, wiki_disease_base):
 
                         #wiki_data[disease_link_tag.contents[0]] = info_tag.find_all('p') + info_tag.find_all('ul')
     return wiki_data
+
+
 def scrapeWiki(base, wiki_data, link):
     try:
         response = requests.get(base + link['href'])
@@ -133,6 +139,7 @@ QUEUECDC = []
 DBCDC = {}
 
 #if h3.text == 'Symptoms'
+
 
 def scrapePageCDC(url, desc):
     global QUEUECDC
@@ -225,54 +232,56 @@ def scrapePageCDC(url, desc):
     except UnicodeEncodeError:
         x = 2
 
+
 def scrapeListCDC(url):
-	#print('### ScrapeList: {}'.format(url))
-	response = requests.get(url)
-	soup = BeautifulSoup(response.text, 'html.parser')
-	section = soup.find(class_='span16')
-	letters = section.find_all('a')
-	results = []
-	for letter in letters:
-		extension = letter['href']
-		#next_url = BASECDC + extension
-		if extension not in SEENCDC:
-			results.append((extension, letter.text))
-			SEENCDC[extension] = True
-			#print('Page:' + extension)
-	return results
+    #print('### ScrapeList: {}'.format(url))
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    section = soup.find(class_='span16')
+    letters = section.find_all('a')
+    results = []
+    for letter in letters:
+        extension = letter['href']
+        #next_url = BASECDC + extension
+        if extension not in SEENCDC:
+            results.append((extension, letter.text))
+            SEENCDC[extension] = True
+            #print('Page:' + extension)
+    return results
+
 
 def crawlPagesCDC(seed_url):
-	global QUEUECDC
-	# add to SEENCDC
-	SEENCDC[seed_url] = True
-	# start with index
-	response = requests.get(seed_url)
-	soup = BeautifulSoup(response.text, 'html.parser')
-	section = soup.find(class_='az_index')
-	letters = section.find_all('a')
-	for letter in letters:
-		extension = letter['href']
-		next_url = BASECDC + extension
-		if letter.text <= 'z' and letter.text >= 'a':
-			#print(next_url)
-			key = 'letter' + letter.text
-			if (('vital' not in next_url) and ('Vital' not in next_url)):
-				QUEUECDC.append((next_url, key))
-			else:
-				for i in range(10):
-					print('vital error')
+    global QUEUECDC
+    # add to SEENCDC
+    SEENCDC[seed_url] = True
+    # start with index
+    response = requests.get(seed_url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    section = soup.find(class_='az_index')
+    letters = section.find_all('a')
+    for letter in letters:
+        extension = letter['href']
+        next_url = BASECDC + extension
+        if letter.text <= 'z' and letter.text >= 'a':
+            #print(next_url)
+            key = 'letter' + letter.text
+            if (('vital' not in next_url) and ('Vital' not in next_url)):
+                QUEUECDC.append((next_url, key))
+            else:
+                for i in range(10):
+                    print('vital error')
 
-	# start crawling]
-	print('Crawling...')
-	while len(QUEUECDC):
-		current_url, t = QUEUECDC[0]
-		QUEUECDC = QUEUECDC[1:]
-		# get list page
-		if 'letter' in t:
-			QUEUECDC += scrapeListCDC(current_url)
-		# get specific page
-		else:
-			scrapePageCDC(current_url, t)
+    # start crawling]
+    print('Crawling...')
+    while len(QUEUECDC):
+        current_url, t = QUEUECDC[0]
+        QUEUECDC = QUEUECDC[1:]
+        # get list page
+        if 'letter' in t:
+            QUEUECDC += scrapeListCDC(current_url)
+        # get specific page
+        else:
+            scrapePageCDC(current_url, t)
 
 
 if __name__ == '__main__':
@@ -293,4 +302,4 @@ if __name__ == '__main__':
 
         # crawlMayo('https://www.mayoclinic.org/diseases-conditions/index')
         # with open('mayoclinic.txt', 'w') as outfile:
-        # 	json.dump(DB, outfile)
+        #   json.dump(DB, outfile)
